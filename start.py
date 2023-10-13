@@ -27,8 +27,8 @@ def fetch_web_page(url):
 
 def send_discord_message(title, url, datetime, entry):
     discord_message = {
-        "username": "Soul's Patchbot",
-        "avatar_url": "https://i.imgur.com/4M34hi2.png",
+        "username": "Bukanier.org Patchbot",
+        "avatar_url": "https://www.bukanier.org/sites/default/files/bukanier_simple.png",
         "embeds": [
             {
                 "title": title,
@@ -43,8 +43,8 @@ def send_discord_message(title, url, datetime, entry):
                     }
                 ],
                 "footer": {
-                    "text": "by SoulofSorrow",
-                    "icon_url": "https://i.imgur.com/fKL31aD.jpg"
+                    "text": "by bukanier.org",
+                    "icon_url": "https://www.bukanier.org/sites/default/files/bukanier_simple.png"
                 }
             }
         ]

@@ -1,7 +1,5 @@
 # Steam Workshop Changelog Monitor
-[![de](https://img.shields.io/badge/lang-de-yello)](https://github.com/SoulofSorrow/Steam-Patchnotes/blob/main/README.de.md)
-
-This Python script has been developed to monitor changes in Steam Workshop changelogs and send notifications via Discord webhooks when new patch notes are available.
+This Python script has been developed to monitor changes in Steam Workshop changelogs and send notifications via Discord webhooks when new patch notes are available. Original Version: https://github.com/SoulofSorrow/Steam-Patchnotes
 
 ## Functionality
 
@@ -25,12 +23,6 @@ This Python script has been developed to monitor changes in Steam Workshop chang
 ## Configuration
 
 - The script stores the last seen patch notes in a configuration file named `config.json`. You can customize the configuration file to your needs.
-
-## Docker Support
-
-If you want to run the script in a Docker container, you can find the relevant files in the `docker` directory:
-- `Dockerfile` - The Docker build file for creating the container.
-- `docker-compose.yml` - The Docker Compose file for container configuration.
 
 ## Note
 

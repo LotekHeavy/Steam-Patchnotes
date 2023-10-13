@@ -25,6 +25,35 @@ def fetch_web_page(url):
         print(f"Error retrieving the page: {e}")
         return None
 
+def send_discord_message(title, url, datetime, entry):
+    discord_message = {
+        "username": "Soul's Patchbot",
+        "avatar_url": "https://i.imgur.com/4M34hi2.png",
+        "embeds": [
+            {
+                "title": title,
+                "url": url,
+                "description": f"Patch Notes for: {title}",
+                "color": 15258703,
+                "fields": [
+                    {
+                        "name": "News",
+                        "value": f"Date and Time: {datetime}\n\n{entry}",
+                        "inline": True
+                    }
+                ],
+                "footer": {
+                    "text": "by SoulofSorrow",
+                    "icon_url": "https://i.imgur.com/fKL31aD.jpg"
+                }
+            }
+        ]
+    }
+    
+    response = requests.post(DISCORD_WEBHOOK_URL, json=discord_message)
+    if response.status_code != 200:
+        debug(f"Failed to send Discord message: {response.content}")
+
 def save_config(data, file_name='config.json'):
     with open(file_name, 'w') as config_file:
         json.dump(data, config_file)
@@ -65,35 +94,13 @@ def main():
                 debug(f'Entry: {current_entry}')
 
                 current_datetime = datetime.now().strftime("%H:%M:%S %d.%m.%Y")
-                discord_message = {
-                    "username": "Soul's Patchbot",
-                    "avatar_url": "https://i.imgur.com/4M34hi2.png",
-                    "embeds": [
-                        {
-                            "title": current_title,
-                            "url": changelog_url,
-                            "description": f"Patch Notes for: {current_title}",
-                            "color": 15258703,
-                            "fields": [
-                                {
-                                    "name": "News",
-                                    "value": f"Date and Time: {current_datetime}\n\n{current_entry}",
-                                    "inline": True
-                                }
-                            ],
-                            "footer": {
-                                "text": "by SoulofSorrow",
-                                "icon_url": "https://i.imgur.com/fKL31aD.jpg"
-                            }
-                        }
-                    ]
-                }
-
-                response = requests.post(DISCORD_WEBHOOK_URL, json=discord_message)
-
+                
+                send_discord_message(current_title, changelog_url, current_datetime, current_entry)
+                
                 # Aktuelle Einträge und Titel speichern
                 saved_data[changelog_url] = {'entry': current_entry, 'title': current_title}
                 save_config(saved_data)
 
 if __name__ == "__main__":
     main()
+
